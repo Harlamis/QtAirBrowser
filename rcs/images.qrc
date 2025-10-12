@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/images">
-        <file>7495619.jpg</file>
+        <file alias="planeImg">plane.png</file>
     </qresource>
 </RCC>
