@@ -163,11 +163,14 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QCheckBox" name="Login_admin_checkbox">
+          <widget class="QPushButton" name="Login_admin_checkbox">
            <property name="font">
             <font>
              <pointsize>13</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:rgb(85, 255, 255)</string>
            </property>
            <property name="text">
             <string>Admin</string>
