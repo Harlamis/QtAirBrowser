@@ -6,5 +6,5 @@
 
 class ISerializable {
     virtual QJsonObject toJson() = 0;
-    virtual void formJson(const QJsonObject &json) = 0;
+    virtual void fromJson(const QJsonObject &json) = 0;
 };

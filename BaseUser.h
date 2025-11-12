@@ -47,4 +47,18 @@ public:
     }
 
     virtual UserRole GetRole() = 0;
+
+    virtual QJsonObject toJson() override {
+        QJsonObject json;
+        json["name"] = name;
+        json["login"] = login;
+        json["password"] = password;
+        return json;
+    }
+
+    virtual void fromJson(const QJsonObject &json) override {
+        name = json["name"].toString();
+        login = json["login"].toString();
+        password = json["password"].toString();
+    }
 };
