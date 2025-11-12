@@ -25,7 +25,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         register_window.h register_window.cpp register_window.ui
         rcs/images.qrc
-        User.h
+        BaseUser.h
         ISerializable.h
 
     )
