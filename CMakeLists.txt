@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         BaseUser.h
         ISerializable.h
         User.h
+        AircraftProduct.h
 
     )
 # Define target properties for Android with Qt 6 as:

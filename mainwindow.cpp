@@ -60,7 +60,7 @@ void MainWindow::on_Login_submit_btn_clicked()
                 if (input_login == login) {
                     if (input_password == password) {
                         // To the next window
-                        QMessageBox::warning(this, "Warning", "Succes!");
+                        QMessageBox::warning(this, "Warning", "Success!");
                         return;
                     }
                     else {
