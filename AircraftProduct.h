@@ -91,6 +91,10 @@ public:
         sold_units = input;
     }
 
+    double RevenueCalc() {
+        return sold_units*price_per_unit;
+    }
+
     virtual AircraftType GetType() = 0;
 
     virtual QJsonObject toJson() override {
