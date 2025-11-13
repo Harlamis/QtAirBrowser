@@ -80,4 +80,12 @@ public:
     void SetLuggage_capacity(int new_cap) {
         luggage_capacity = new_cap;
     }
+
+    bool CanFitPassengers(int passengers) {
+        return passengers <= passengers_capacity;
+    }
+
+    bool CanFitLuggage(double luggage) {
+        return luggage <= luggage_capacity;
+    }
 };
