@@ -2,6 +2,7 @@
 #define AIRCRAFTDESIGNER_H
 #include <Qlist>
 #include <QMutableListIterator>
+#include <QJsonArray>
 #include "AircraftProduct.h"
 #endif // AIRCRAFTDESIGNER_H
 
@@ -45,5 +46,21 @@ public:
             return true;
         }
         return false;
+    }
+
+    virtual QJsonObject toJson() {
+        QJsonObject designerObject;
+        designerObject["name"] = name;
+        designerObject["revenue"] = revenue;
+        QJsonArray productsArr;
+        for ( AircraftProduct* product : products) {
+            if (product) {
+                QJsonObject productJson = product->toJson();
+                productJson["type"] = product->GetType();
+                productsArr.append(productJson);
+            }
+        }
+        designerObject["products"] = productsArr;
+        return designerObject;
     }
 };
