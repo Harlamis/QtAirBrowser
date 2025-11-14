@@ -24,7 +24,13 @@ public:
     }
 
     void AddProduct(AircraftProduct* product) {
-
+        if (product) {
+            products.append(product);
+            qDebug() << "Product added" << product->GetModelName();
+            return;
+        }
+        qWarning("Attempted to add a null priduct.");
+        return;
     }
 
     bool RmProduct(const QString &product_name) {
