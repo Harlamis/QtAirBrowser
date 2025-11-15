@@ -1,66 +1,33 @@
 #ifndef AIRCRAFTDESIGNER_H
 #define AIRCRAFTDESIGNER_H
-#include <Qlist>
+
+#include <QList>
 #include <QMutableListIterator>
 #include <QJsonArray>
-#include "AircraftProduct.h"
-#endif // AIRCRAFTDESIGNER_H
+#include <QJsonValue>
+#include <QString>
+#include <QDebug>
+#include "ISerializable.h"
+
+class AircraftProduct; //forvard declaration
 
 class AircraftDesigner : public ISerializable {
     QString name;
     QList<AircraftProduct*> products;
     double revenue = 0;
 public:
-    AircraftDesigner(QString name)
-        : name{name}, revenue{0}, products{} {};
-    AircraftDesigner()
-        : AircraftDesigner("") {};
+    AircraftDesigner(QString name);
+    AircraftDesigner();
+    virtual ~AircraftDesigner();
 
-    QString GetName() {
-        return name;
-    }
+    QString GetName() const;
+    QList<AircraftProduct*> GetProductsList() const;
 
-    QList<AircraftProduct*> GetProductsList() {
-        return products;
-    }
+    void AddProduct(AircraftProduct* product);
+    bool RmProduct(const QString &product_name);
 
-    void AddProduct(AircraftProduct* product) {
-        if (product) {
-            products.append(product);
-            qDebug() << "Product added" << product->GetModelName();
-            return;
-        }
-        qWarning("Attempted to add a null priduct.");
-        return;
-    }
-
-    bool RmProduct(const QString &product_name) {
-        QMutableListIterator<AircraftProduct*> i(products);
-        while (i.hasNext()) {
-            AircraftProduct* product = i.next();
-            if (product && product->GetModelName() == product_name) {
-                i.remove();
-            }
-            delete product;
-            qDebug() << "product was released during removal from list\n";
-            return true;
-        }
-        return false;
-    }
-
-    virtual QJsonObject toJson() {
-        QJsonObject designerObject;
-        designerObject["name"] = name;
-        designerObject["revenue"] = revenue;
-        QJsonArray productsArr;
-        for ( AircraftProduct* product : products) {
-            if (product) {
-                QJsonObject productJson = product->toJson();
-                productJson["type"] = product->GetType();
-                productsArr.append(productJson);
-            }
-        }
-        designerObject["products"] = productsArr;
-        return designerObject;
-    }
+    virtual void fromJson(const QJsonObject &json) override;
+    virtual QJsonObject toJson() const override;
 };
+
+#endif // AIRCRAFTDESIGNER_H

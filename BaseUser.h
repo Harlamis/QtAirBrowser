@@ -1,10 +1,9 @@
 #ifndef BASEUSER_H
 #define BASEUSER_H
-#include <qstring.h>
-#include "ISerializable.h"
-#include <QJsonObject>
 
-#endif // BASEUSER_H
+#include <QString>
+#include <QJsonObject>
+#include "ISerializable.h"
 
 enum UserRole {
     User,
@@ -16,49 +15,24 @@ class BaseUser : public ISerializable {
     QString login;
     QString password;
 public:
-    BaseUser() : name{""}, login{""}, password{""} {};
-    BaseUser(QString new_name, QString new_login, QString new_password) : name{new_name}, login{new_login}, password{new_password} {};
-    QString GetName() {
-        return name;
-    }
+    BaseUser();
+    BaseUser(QString new_name, QString new_login, QString new_password);
+    virtual ~BaseUser() {}
 
-    QString GetLogin() {
-        return login;
-    }
+    QString GetName() const;
+    QString GetLogin() const;
+    QString GetPassword() const;
 
-    QString GetPassword() {
-        return password;
-    }
+    void SetName(const QString &input);
+    void SetLogin(const QString &input);
+    void SetPassword(const QString &input);
 
-    void SetName(const QString &input) {
-        name = input;
-    }
-
-    void SetLogin(const QString &input) {
-        login = input;
-    }
-
-    void SetPassword(const QString &input) {
-        password = input;
-    }
-
-    bool CheckPassword(const QString input) {
-        return input == password;
-    }
+    bool CheckPassword(const QString input) const;
 
     virtual UserRole GetRole() = 0;
 
-    virtual QJsonObject toJson() override {
-        QJsonObject json;
-        json["name"] = name;
-        json["login"] = login;
-        json["password"] = password;
-        return json;
-    }
-
-    virtual void fromJson(const QJsonObject &json) override {
-        name = json["name"].toString();
-        login = json["login"].toString();
-        password = json["password"].toString();
-    }
+    virtual QJsonObject toJson() const override;
+    virtual void fromJson(const QJsonObject &json) override;
 };
+
+#endif // BASEUSER_H
