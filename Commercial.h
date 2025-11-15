@@ -58,6 +58,14 @@ public:
         return object;
     }
 
+    virtual void fromJson(const QJsonObject &json) override {
+        AircraftProduct::fromJson(json);
+        numberof_decks = json["numberof_decks"].toInt();
+        numberof_pilots = json["numberof_pilots"].toInt();
+        passengers_capacity = json["passengers_capacity"].toInt();
+        luggage_capacity = json["luggage_capacity"].toDouble();
+    }
+
     int GetNumberof_decks() {
         return numberof_decks;
     }
