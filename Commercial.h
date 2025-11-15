@@ -1,9 +1,10 @@
 #ifndef COMMERCIAL_H
 #define COMMERCIAL_H
+
 #include "AircraftProduct.h"
-#include "QJsonObject"
+#include <QJsonObject>
 #include <utility>
-#endif // COMMERCIAL_H
+#include <QDebug>
 
 class Commercial : public AircraftProduct {
     int numberof_decks;
@@ -11,98 +12,32 @@ class Commercial : public AircraftProduct {
     int passengers_capacity;
     double luggage_capacity;
 public:
-    Commercial(int decks, int pilots, int passengers_cap, double luggage_cap)
-        : AircraftProduct(), numberof_decks{decks}, numberof_pilots{pilots},
-        luggage_capacity{luggage_cap}, passengers_capacity{passengers_cap} {};
+    Commercial(int decks, int pilots, int passengers_cap, double luggage_cap);
+    Commercial();
+    Commercial(int decks);
+    Commercial(int decks, int pilots);
+    Commercial(int decks, int pilots, int passengers_cap);
 
-    Commercial()
-        : Commercial(0,1,0,0) {};
+    Commercial(const Commercial &other);
+    Commercial(Commercial &&other) noexcept;
+    ~Commercial() override;
 
-    Commercial(int decks)
-        : Commercial(decks,1,0,0) {};
+    virtual QString GetType() const override;
 
-    Commercial(int decks, int pilots)
-        : Commercial(decks,pilots,0,0) {};
+    virtual QJsonObject toJson() const override;
+    virtual void fromJson(const QJsonObject &json) override;
 
-    Commercial(int decks, int pilots, int passengers_cap)
-        : Commercial(decks,pilots,passengers_cap, 0) {};
+    int GetNumberof_decks() const;
+    void SetNumberof_decks(int decks);
+    int GetNumberof_pilots() const;
+    void SetNumberof_pilots(int pilots);
+    int GetPassengers_capacity() const;
+    void SetPassengers_capacity(int new_cap);
+    double GetLuggage_capacity() const;
+    void SetLuggage_capacity(double new_cap);
 
-    Commercial(Commercial &other)
-        : AircraftProduct(other),
-        numberof_decks{other.numberof_decks},
-        numberof_pilots{other.numberof_pilots},
-        passengers_capacity{other.passengers_capacity},
-        luggage_capacity{other.luggage_capacity} {};
-
-    Commercial(Commercial &&other)
-        : AircraftProduct(std::move(other)),
-        numberof_decks{other.numberof_decks},
-        numberof_pilots{other.numberof_pilots},
-        passengers_capacity{other.passengers_capacity},
-        luggage_capacity{other.luggage_capacity} {};
-
-    ~Commercial() override {
-        qDebug() << "Commercial object was destroyed\n";
-    }
-
-    virtual AircraftType GetType() override {
-        return AircraftType::Commercial;
-    }
-
-    virtual QJsonObject toJson() override {
-        QJsonObject object = AircraftProduct::toJson();
-        object["numberof_decks"] = numberof_decks;
-        object["numberof_pilots"] = numberof_pilots;
-        object["passengers_capacity"] = passengers_capacity;
-        object["luggage_capacity"] = luggage_capacity;
-        return object;
-    }
-
-    virtual void fromJson(const QJsonObject &json) override {
-        AircraftProduct::fromJson(json);
-        numberof_decks = json["numberof_decks"].toInt();
-        numberof_pilots = json["numberof_pilots"].toInt();
-        passengers_capacity = json["passengers_capacity"].toInt();
-        luggage_capacity = json["luggage_capacity"].toDouble();
-    }
-
-    int GetNumberof_decks() {
-        return numberof_decks;
-    }
-
-    void SetNumberof_decks(int decks) {
-        numberof_decks = decks;
-    }
-
-    int GetNumberof_pilots() {
-        return numberof_pilots;
-    }
-
-    void SetNumberof_pilots(int pilots) {
-        numberof_pilots = pilots;
-    }
-
-    int GetPassengers_capacity() {
-        return passengers_capacity;
-    }
-
-    void SetPassengers_capacity(int new_cap) {
-        passengers_capacity = new_cap;
-    }
-
-    int GetLuggage_capacity() {
-        return luggage_capacity;
-    }
-
-    void SetLuggage_capacity(int new_cap) {
-        luggage_capacity = new_cap;
-    }
-
-    bool CanFitPassengers(int passengers) {
-        return passengers <= passengers_capacity;
-    }
-
-    bool CanFitLuggage(double luggage) {
-        return luggage <= luggage_capacity;
-    }
+    bool CanFitPassengers(int passengers) const;
+    bool CanFitLuggage(double luggage) const;
 };
+
+#endif // COMMERCIAL_H
