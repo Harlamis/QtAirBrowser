@@ -49,6 +49,15 @@ public:
         return AircraftType::Commercial;
     }
 
+    virtual QJsonObject toJson() override {
+        QJsonObject object = AircraftProduct::toJson();
+        object["numberof_decks"] = numberof_decks;
+        object["numberof_pilots"] = numberof_pilots;
+        object["passengers_capacity"] = passengers_capacity;
+        object["luggage_capacity"] = luggage_capacity;
+        return object;
+    }
+
     int GetNumberof_decks() {
         return numberof_decks;
     }
