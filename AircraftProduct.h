@@ -106,4 +106,13 @@ public:
         json["sold_units"] = sold_units;
         return json;
     }
+
+    virtual void fromJson(const QJsonObject &json) override {
+        model_name = json["model_name"].toString();
+        model_number = json["model_number"].toInt();
+        max_speed = json["max_speed"].toDouble();
+        price_per_unit = json["price_per_unit"].toDouble();
+        sold_units = json["sold_units"].toInt();
+        qDebug() << model_name << ": object loaded";
+    }
 };
