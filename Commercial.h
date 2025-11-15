@@ -39,5 +39,4 @@ public:
     bool CanFitPassengers(int passengers) const;
     bool CanFitLuggage(double luggage) const;
 };
-
 #endif // COMMERCIAL_H
