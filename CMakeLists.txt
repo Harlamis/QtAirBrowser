@@ -37,6 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Commercial.cpp
         AircraftDesigner.cpp
         Fighter.h Fighter.cpp
+        Admin.h Admin.cpp
 
     )
 # Define target properties for Android with Qt 6 as:
