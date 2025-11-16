@@ -28,11 +28,11 @@ Admin& Admin::operator=(Admin&& other) noexcept {
     return *this;
 }
 
-QString Admin::GetRole() {
+QString Admin::GetRole() const {
     return "Admin";
 }
 
-QJsonObject Admin::toJson() {
+QJsonObject Admin::toJson() const {
     QJsonObject json = BaseUser::toJson();
     json["_role"] = GetRole();
     return json;

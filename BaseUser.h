@@ -24,9 +24,9 @@ public:
 
     bool CheckPassword(const QString input) const;
 
-    virtual QString GetRole() = 0;
+    virtual QString GetRole() const = 0;
 
-    virtual QJsonObject toJson() override;
+    virtual QJsonObject toJson() const override;
     virtual void fromJson(const QJsonObject &json) override;
 };
 

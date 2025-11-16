@@ -33,7 +33,7 @@ bool BaseUser::CheckPassword(const QString input) const {
     return input == password;
 }
 
-QJsonObject BaseUser::toJson() {
+QJsonObject BaseUser::toJson() const {
     QJsonObject json;
     json["name"] = name;
     json["login"] = login;

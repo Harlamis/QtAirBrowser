@@ -3,6 +3,7 @@
 #include "Commercial.h"
 #include "Fighter.h"
 #include <QtAlgorithms>
+#include <QtGlobal>
 
 AircraftDesigner::AircraftDesigner(QString name)
     : name{name}, revenue{0}, products{} {}
@@ -19,7 +20,7 @@ QString AircraftDesigner::GetName() const {
     return name;
 }
 
-QList<AircraftProduct*> AircraftDesigner::GetProductsList() const {
+QList<AircraftDesigner*> AircraftDesigner::GetProductsList() const {
     return products;
 }
 
@@ -50,7 +51,7 @@ bool AircraftDesigner::RmProduct(const QString &product_name) {
 void AircraftDesigner::fromJson(const QJsonObject &json) {
     name = json["name"].toString();
     revenue = json["revenue"].toDouble();
-    //better to clear the list before loading data to it
+
     qDeleteAll(products);
     products.clear();
 
@@ -65,8 +66,7 @@ void AircraftDesigner::fromJson(const QJsonObject &json) {
 
             if (type == "Commercial") {
                 newProduct = new Commercial();
-            }
-            else if (type == "Fighter") {
+            } else if (type == "Fighter") {
                 newProduct = new Fighter();
             }
 
@@ -80,12 +80,12 @@ void AircraftDesigner::fromJson(const QJsonObject &json) {
     }
 }
 
-QJsonObject AircraftDesigner::toJson() {
+QJsonObject AircraftDesigner::toJson() const {
     QJsonObject designerObject;
     designerObject["name"] = name;
     designerObject["revenue"] = revenue;
     QJsonArray productsArr;
-    for ( AircraftProduct* product : products) {
+    for ( AircraftProduct* product : qAsConst(products)) {
         if (product) {
             QJsonObject productJson = product->toJson();
             productJson["type"] = product->GetType();

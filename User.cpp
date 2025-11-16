@@ -4,6 +4,7 @@
 #include <QJsonArray>
 #include <QDebug>
 #include <utility>
+#include <QtGlobal>
 
 User::User() : BaseUser() {}
 
@@ -51,15 +52,15 @@ User& User::operator=(User&& other) noexcept {
     return *this;
 }
 
-QString User::GetRole() {
+QString User::GetRole() const {
     return "User";
 }
 
-QJsonObject User::toJson() {
+QJsonObject User::toJson() const {
     QJsonObject json = BaseUser::toJson();
 
     QJsonArray favouritesArray;
-    for ( AircraftDesigner* designer : favourites) {
+    for (const AircraftDesigner* designer : qAsConst(favourites)) {
         favouritesArray.append(designer->toJson());
     }
     json["favourites"] = favouritesArray;

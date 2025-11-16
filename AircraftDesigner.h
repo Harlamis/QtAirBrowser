@@ -9,7 +9,7 @@
 #include <QDebug>
 #include "ISerializable.h"
 
-class AircraftProduct; //forvard declaration
+class AircraftProduct;
 
 class AircraftDesigner : public ISerializable {
     QString name;
