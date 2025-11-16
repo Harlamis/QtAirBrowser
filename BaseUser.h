@@ -5,11 +5,6 @@
 #include <QJsonObject>
 #include "ISerializable.h"
 
-enum UserRole {
-    User,
-    Admin
-};
-
 class BaseUser : public ISerializable {
     QString name;
     QString login;
@@ -29,9 +24,9 @@ public:
 
     bool CheckPassword(const QString input) const;
 
-    virtual UserRole GetRole() = 0;
+    virtual QString GetRole() = 0;
 
-    virtual QJsonObject toJson() const override;
+    virtual QJsonObject toJson() override;
     virtual void fromJson(const QJsonObject &json) override;
 };
 

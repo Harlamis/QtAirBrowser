@@ -6,7 +6,7 @@
 class ISerializable {
 public:
     virtual ~ISerializable() {}
-    virtual QJsonObject toJson() const = 0;
+    virtual QJsonObject toJson() = 0;
     virtual void fromJson(const QJsonObject &json) = 0;
 };
 

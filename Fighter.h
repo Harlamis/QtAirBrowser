@@ -16,7 +16,7 @@ public:
     Fighter(Fighter &&other) noexcept;
     ~Fighter() override;
     virtual QString GetType() const override;
-    virtual QJsonObject toJson() const override;
+    virtual QJsonObject toJson() override;
     virtual void fromJson(const QJsonObject &json) override;
 
     double GetStealth_range() const;

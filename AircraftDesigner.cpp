@@ -1,7 +1,7 @@
 #include "AircraftDesigner.h"
 #include "AircraftProduct.h"
 #include "Commercial.h"
-// #include "Military.h" // Додайте, коли цей клас буде готовий
+#include "Fighter.h"
 #include <QtAlgorithms>
 
 AircraftDesigner::AircraftDesigner(QString name)
@@ -66,9 +66,9 @@ void AircraftDesigner::fromJson(const QJsonObject &json) {
             if (type == "Commercial") {
                 newProduct = new Commercial();
             }
-            // else if (type == "Military") {
-            //     newProduct = new Military();
-            // }
+            else if (type == "Fighter") {
+                newProduct = new Fighter();
+            }
 
             if (newProduct) {
                 newProduct->fromJson(productObject);
@@ -80,7 +80,7 @@ void AircraftDesigner::fromJson(const QJsonObject &json) {
     }
 }
 
-QJsonObject AircraftDesigner::toJson() const {
+QJsonObject AircraftDesigner::toJson() {
     QJsonObject designerObject;
     designerObject["name"] = name;
     designerObject["revenue"] = revenue;
