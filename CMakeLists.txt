@@ -39,6 +39,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Fighter.h Fighter.cpp
         Admin.h Admin.cpp
         DatabaseManager.h DatabaseManager.cpp
+        ValidationException.h
 
     )
 # Define target properties for Android with Qt 6 as:
