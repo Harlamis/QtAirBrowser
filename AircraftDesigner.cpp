@@ -20,7 +20,7 @@ QString AircraftDesigner::GetName() const {
     return name;
 }
 
-QList<AircraftDesigner*> AircraftDesigner::GetProductsList() const {
+QList<AircraftProduct*> AircraftDesigner::GetProductsList() const {
     return products;
 }
 
