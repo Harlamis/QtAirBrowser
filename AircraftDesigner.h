@@ -25,6 +25,7 @@ public:
 
     void AddProduct(AircraftProduct* product);
     bool RmProduct(const QString &product_name);
+    double RecalculateRevenue();
 
     virtual void fromJson(const QJsonObject &json) override;
     virtual QJsonObject toJson() const override;

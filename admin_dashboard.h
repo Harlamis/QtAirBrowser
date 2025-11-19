@@ -4,7 +4,7 @@
 #include "DatabaseManager.h"
 #include <QMainWindow>
 
-namespace ui {
+namespace Ui {
 class AdminDashboard;
 }
 
@@ -23,9 +23,9 @@ private slots:
     void on_btn_logout_clicked();
     void on_btn_help_clicked();
     void on_search_input_textChanged(const QString &arg1);
-    void on_table_designers_cellDoubleClicked();
+    void on_table_designers_cellDoubleClicked(int row, int column);
 private:
-    ui::AdminDashboard *ui;
+    Ui::AdminDashboard *ui;
     DatabaseManager* m_db;
     void refreshDesignersTable();
     void refreshUsersTable();
