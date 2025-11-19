@@ -15,8 +15,5 @@ public:
     const char* what() const noexcept override {
         return m_utf8Message.constData();
     }
-
-
 };
-
 #endif // VALIDATIONEXCEPTION_H
