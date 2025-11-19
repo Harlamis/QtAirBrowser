@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminDashboard</class>
+ <widget class="QMainWindow" name="AdminDashboard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Admin Dashboard</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_designers">
+       <attribute name="title">
+        <string>Aircraft Designers</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_search">
+          <item>
+           <widget class="QLabel" name="label_search">
+            <property name="text">
+             <string>Search:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="search_input">
+            <property name="placeholderText">
+             <string>Filter by name...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_help">
+            <property name="text">
+             <string>Help / Manual</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="table_designers">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Revenue</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Product Count</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_actions">
+          <item>
+           <widget class="QPushButton" name="btn_add_designer">
+            <property name="styleSheet">
+             <string>background-color: green; color: white; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Add New Designer</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_remove_designer">
+            <property name="styleSheet">
+             <string>background-color: red; color: white;</string>
+            </property>
+            <property name="text">
+             <string>Delete Selected</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_refresh">
+            <property name="text">
+             <string>Refresh Data</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_users">
+       <attribute name="title">
+        <string>Manage Users</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTableWidget" name="table_users">
+          <column>
+           <property name="text">
+            <string>Login</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Full Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Role</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_delete_user">
+          <property name="text">
+           <string>Delete User</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_logout">
+      <property name="text">
+       <string>Logout</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

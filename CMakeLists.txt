@@ -40,6 +40,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Admin.h Admin.cpp
         DatabaseManager.h DatabaseManager.cpp
         ValidationException.h
+        admin_dashboard.ui
+        admin_dashboard.h
 
     )
 # Define target properties for Android with Qt 6 as:
