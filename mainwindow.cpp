@@ -11,9 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     m_db = &DatabaseManager::instance(); //creating database instance
-    if (!m_db->loadFromFile()) {
-        ui->status_label->setText("Failed to load database file!"); //better doing this with exceptions...
+    try {
+        if (!m_db->loadFromFile()) throw ValidationExcpetion("Failed to load database file!");
     }
+    catch (ValidationExcpetion &e) {
+         ui->status_label->setText(e.getMessage());
+    }
+
     //register window init on program launch
     m_registerWindow = new Register_window(this);
 }
@@ -39,6 +43,9 @@ void MainWindow::on_Login_submit_btn_clicked()
         if (username.isEmpty()) throw ValidationExcpetion("Please, enter your username");
         if (password.isEmpty()) throw ValidationExcpetion("Please, enter your password");
 
+    }
+    catch (const ValidationExcpetion &e) {
+        ui->status_label->setText(e.getMessage());
     }
 
 }

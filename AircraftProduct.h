@@ -41,7 +41,7 @@ public:
 
     virtual QString GetType() const = 0;
 
-    virtual QJsonObject toJson() override;
+    virtual QJsonObject toJson() const override;
     virtual void fromJson(const QJsonObject &json) override;
 };
 
