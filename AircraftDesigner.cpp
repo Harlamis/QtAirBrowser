@@ -95,3 +95,12 @@ QJsonObject AircraftDesigner::toJson() const {
     designerObject["products"] = productsArr;
     return designerObject;
 }
+
+double AircraftDesigner::RecalculateRevenue() {
+    double total = 0;
+    for (const AircraftProduct* product : qAsConst(products)) {
+        total += product->RevenueCalc();
+    }
+    revenue = total;
+    return total;
+}

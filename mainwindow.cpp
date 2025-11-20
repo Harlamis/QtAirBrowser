@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //register window init on program launch
-    m_registerWindow = new Register_window(this);
 }
 
 MainWindow::~MainWindow()
@@ -31,8 +30,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Login_register_btn_clicked()
 {
+    m_registerWindow = new Register_window(this);
     m_registerWindow->show();
-    this->hide();
+    // this->hide();
 }
 
 void MainWindow::on_Login_submit_btn_clicked()
