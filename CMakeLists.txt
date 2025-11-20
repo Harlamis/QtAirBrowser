@@ -43,10 +43,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         admin_dashboard.h admin_dashboard.cpp admin_dashboard.ui
         productmanager_window.h productmanager_window.cpp productmanager_window.ui
         product_editor_dialog.h product_editor_dialog.cpp product_editor_dialog.ui
-
-
-
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET QtAirBrowser APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -96,4 +96,36 @@ void ProductManagerWindow::on_btn_add_clicked()
         }
     }
 }
+void ProductManagerWindow::on_btn_delete_clicked()
+{
+    int currentRow = ui->table_products->currentRow();
+    if (currentRow < 0) {
+        QMessageBox::warning(this, "Selection", "Please select a product to delete.");
+        return;
+    }
+
+    QTableWidgetItem* item = ui->table_products->item(currentRow, 0);
+    if (!item) return;
+    QString modelName = item->text();
+
+    auto reply = QMessageBox::question(this, "Confirm Delete",
+                                       "Are you sure you want to delete product '" + modelName + "'?",
+                                       QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        if (m_designer->RmProduct(modelName)) {
+            m_db->saveToFile();
+            refreshTable();
+
+            QMessageBox::information(this, "Success", "Product deleted successfully.");
+        } else {
+            QMessageBox::warning(this, "Error", "Failed to delete product (not found).");
+        }
+    }
+}
+
+void ProductManagerWindow::on_btn_close_clicked()
+{
+    this->close();
+}
 
