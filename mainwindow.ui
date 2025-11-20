@@ -58,7 +58,7 @@
             </font>
            </property>
            <property name="text">
-            <string>User Name</string>
+            <string>Login</string>
            </property>
           </widget>
          </item>
@@ -95,11 +95,11 @@
        </item>
        <item>
         <widget class="QLabel" name="status_label">
-         <property name="text">
-          <string/>
-         </property>
          <property name="styleSheet">
           <string notr="true">color: red;</string>
+         </property>
+         <property name="text">
+          <string/>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignCenter</set>

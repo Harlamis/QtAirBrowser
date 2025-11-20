@@ -8,8 +8,9 @@
 #include <QString>
 
 Register_window::Register_window(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(nullptr)
     , ui(new Ui::Register_window)
+    , m_loginWindow(parent)
 {
     ui->setupUi(this);
     m_db = &DatabaseManager::instance(); //accesing database
@@ -51,7 +52,7 @@ void Register_window::on_Register_submit_btn_clicked() {
             ui->Register_admin_checkbox->setChecked(false);
             //hiding this window, return to loginscreen
             this->hide();
-            if (this->parentWidget()) this->parentWidget()->show();
+            if (m_loginWindow) m_loginWindow->show();
         } else {
             delete newUser;
             throw ValidationExcpetion("Failed to create user for unknown reason");
@@ -64,5 +65,5 @@ void Register_window::on_Register_submit_btn_clicked() {
 void Register_window::on_Register_back_btn_clicked() {
     ui->status_label->clear();
     this->hide();
-    if (this->parentWidget()) this->parentWidget()->show();
+    if (m_loginWindow) m_loginWindow->show();
 }

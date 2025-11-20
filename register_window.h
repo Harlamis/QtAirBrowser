@@ -22,6 +22,7 @@ private slots:
 
 private:
     Ui::Register_window *ui;
+    QWidget* m_loginWindow; //we keep this not to loose main window when pressing back btn
     DatabaseManager* m_db;
 };
 
