@@ -2,6 +2,7 @@
 #include "ui_admin_dashboard.h"
 #include "AircraftDesigner.h"
 #include "BaseUser.h"
+#include "productmanager_window.h"
 #include <QInputDialog>
 #include <QMessageBox>
 
@@ -146,11 +147,21 @@ void AdminDashboard::on_btn_help_clicked()
     QMessageBox::about(this, "User Manual", helpText);
 }
 
-void AdminDashboard::on_table_designers_cellDoubleClicked(int row, int column)
-{
-    QString name = ui->table_designers->item(row, 0)->text();
-    QMessageBox::information(this, "Info", "Editing functionality for " + name + " would open here.\n(e.g., to add planes to this designer).");
-    // Тут можна відкрити нове вікно 'DesignerEditorWindow' для роботи з продуктами
+void AdminDashboard::on_table_designers_cellDoubleClicked(int row, int column) {
+    QTableWidgetItem* item = ui->table_designers->item(row, 0);
+    if (!item) return;
+
+    QString designerName = item->text();
+
+    AircraftDesigner* designer = m_db->findDesigner(designerName);
+
+    if (designer) {
+        ProductManagerWindow managerWindow(designer, this);
+        managerWindow.exec();
+        refreshDesignersTable();
+    } else {
+        QMessageBox::warning(this, "Error", "Designer not found in database!");
+    }
 }
 
 void AdminDashboard::on_btn_refresh_clicked()
