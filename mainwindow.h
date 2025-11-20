@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "DatabaseManager.h"
 #include "register_window.h"
+#include "admin_dashboard.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,7 +28,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     DatabaseManager* m_db; //database manager singleton
-    Register_window* m_registerWindow;
     // future windows will be here
+    Register_window* m_registerWindow;
+    AdminDashboard* m_adminDashboard = nullptr;
+
 };
 #endif // MAINWINDOW_H

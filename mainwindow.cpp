@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "register_window.h"
 #include "BaseUser.h"
+#include <QMessageBox>
 #include "ValidationException.h"
 
 
@@ -42,6 +43,25 @@ void MainWindow::on_Login_submit_btn_clicked()
         QString password = ui->Login_password_input->text();
         if (username.isEmpty()) throw ValidationExcpetion("Please, enter your username");
         if (password.isEmpty()) throw ValidationExcpetion("Please, enter your password");
+        //attempting to login...
+        BaseUser* user = m_db->login(username,password);
+        if (user == nullptr) {
+            throw ValidationExcpetion("Invalid login or password");
+        }
+        ui->Login_password_input->clear();
+        this->hide();
+        QString role = user->GetRole();
+        if (role == "Admin") {
+        if (m_adminDashboard == nullptr) {
+            m_adminDashboard = new AdminDashboard(this);
+        }
+        m_adminDashboard->show();
+        } else {
+            QMessageBox::information(this, "Info", "User interface is under construction.");
+            //todo user window....
+            this->show();
+        }
+
 
     }
     catch (const ValidationExcpetion &e) {
