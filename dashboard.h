@@ -3,6 +3,7 @@
 
 #include "DatabaseManager.h"
 #include <QMainWindow>
+#include <QApplication>
 
 namespace Ui {
 class Dashboard;
@@ -31,6 +32,8 @@ private:
     void refreshDesignersTable();
     void refreshUsersTable();
     void setupPermissions();
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 
 #endif // DASHBOARD_H

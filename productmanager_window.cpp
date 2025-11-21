@@ -1,7 +1,6 @@
 #include "productmanager_window.h"
 #include "ui_productmanager_window.h"
 #include "AircraftDesigner.h"
-#include "Commercial.h"
 #include <QInputDialog>
 #include <QMessageBox>
 #include "product_editor_dialog.h"
@@ -15,6 +14,13 @@ ProductManagerWindow::ProductManagerWindow(AircraftDesigner* designer,QWidget *p
     ui->setupUi(this);
     m_db = &DatabaseManager::instance();
     this->setWindowTitle("Manage products for " + m_designer->GetName());
+    ui->btn_add->setAutoDefault(false);
+    ui->btn_add->setDefault(false);
+    ui->btn_delete->setAutoDefault(false);
+    ui->btn_delete->setDefault(false);
+    ui->btn_close->setAutoDefault(false);
+    ui->btn_close->setDefault(false);
+    ui->filter_name->setFocus();
     refreshTable();
 }
 
@@ -41,15 +47,19 @@ void ProductManagerWindow::refreshTable() {
 
         // Speed
         QTableWidgetItem* speedItem = new QTableWidgetItem();
-        speedItem->setData(Qt::DisplayRole, p->GetMax_speed());
+        double speed = p->GetMax_speed();
+        speedItem->setData(Qt::DisplayRole, QString::number(speed, 'f', 2));
+        speedItem->setData(Qt::EditRole, speed);
         ui->table_products->setItem(row, 2, speedItem);
 
         // Price
         QTableWidgetItem* priceItem = new QTableWidgetItem();
-        priceItem->setData(Qt::DisplayRole, p->GetPrice());
+        double price = p->GetPrice();
+        priceItem->setData(Qt::DisplayRole, QString::number(price, 'f', 2));
+        priceItem->setData(Qt::EditRole, price);
         ui->table_products->setItem(row, 3, priceItem);
 
-        // Sold
+        // Sold Units
         QTableWidgetItem* soldItem = new QTableWidgetItem();
         soldItem->setData(Qt::DisplayRole, p->GetSold_units());
         ui->table_products->setItem(row, 4, soldItem);

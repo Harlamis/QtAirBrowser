@@ -20,6 +20,9 @@ private slots:
     void on_Register_submit_btn_clicked();
     void on_Register_back_btn_clicked();
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private:
     Ui::Register_window *ui;
     QWidget* m_loginWindow; //we keep this not to loose main window when pressing back btn

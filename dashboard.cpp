@@ -5,21 +5,47 @@
 #include "productmanager_window.h"
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QApplication>
+#include <QCloseEvent>
 
-Dashboard::Dashboard(QWidget *parent) :
+Dashboard::Dashboard(BaseUser* user,QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Dashboard)
+    ui(new Ui::Dashboard),
+    m_currentUser(user)
 {
     ui->setupUi(this);
     m_db = &DatabaseManager::instance();
 
     refreshDesignersTable();
     refreshUsersTable();
+    setupPermissions();
+    refreshDesignersTable();
+    if (m_currentUser->GetName() == "Admin") {
+        refreshUsersTable();
+    }
 }
 
 Dashboard::~Dashboard()
 {
     delete ui;
+}
+
+void Dashboard::closeEvent(QCloseEvent *event) {
+    if (this->parentWidget() && !this->parentWidget()->isVisible()){
+        QApplication::exit(0);
+    }
+    event->accept();
+}
+
+void Dashboard::setupPermissions() {
+    QString role = m_currentUser->GetRole();
+    this->setWindowTitle("Manage AirBrowser, role: " + role);
+    if (role != "Admin") {
+        int userTabIndex = ui->tabWidget->indexOf(ui->tab_users);
+        if (userTabIndex != -1) {
+            ui->tabWidget->removeTab(userTabIndex);
+        }
+    }
 }
 
 void Dashboard::refreshDesignersTable()
@@ -173,8 +199,9 @@ void Dashboard::on_btn_refresh_clicked()
 void Dashboard::on_btn_logout_clicked()
 {
     m_db->logout();
-    this->close();
     if (this->parentWidget()) {
         this->parentWidget()->show();
     }
+    this->close();
 }
+

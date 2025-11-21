@@ -51,18 +51,10 @@ void MainWindow::on_Login_submit_btn_clicked()
         ui->Login_password_input->clear();
         this->hide();
         QString role = user->GetRole();
-        if (role == "Admin") {
-        if (m_adminDashboard == nullptr) {
-            m_adminDashboard = new Dashboard(this);
+        if (m_dashboard == nullptr) {
+                m_dashboard = new Dashboard(user,this);
         }
-        m_adminDashboard->show();
-        } else {
-            QMessageBox::information(this, "Info", "User interface is under construction.");
-            //todo user window....
-            this->show();
-        }
-
-
+        m_dashboard->show();
     }
     catch (const ValidationExcpetion &e) {
         ui->status_label->setText(e.getMessage());

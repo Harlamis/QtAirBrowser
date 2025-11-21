@@ -6,6 +6,10 @@
 #include "ValidationException.h"
 #include <QMessageBox>
 #include <QString>
+#include <QInputDialog>
+#include <QCloseEvent>
+
+const QString ADMIN_PASSWORD = "C++SUX";
 
 Register_window::Register_window(QWidget *parent)
     : QWidget(nullptr)
@@ -19,6 +23,14 @@ Register_window::Register_window(QWidget *parent)
 Register_window::~Register_window()
 {
     delete ui;
+}
+
+void Register_window::closeEvent(QCloseEvent *event)
+{
+    if (m_loginWindow && !m_loginWindow->isVisible()) {
+        QApplication::exit(0);
+    }
+    event->accept();
 }
 
 void Register_window::on_Register_submit_btn_clicked() {
@@ -36,6 +48,14 @@ void Register_window::on_Register_submit_btn_clicked() {
         if (password.length() < 8) throw ValidationExcpetion("Password must be at least 8 characters long");
         //making sure that there is no dublicate user in DB
         if (m_db->findUser(login)) throw ValidationExcpetion("User with this login already exists");
+        if (isAdmin) {
+            bool ok;
+            QString code = QInputDialog::getText(this, "Admin Verification", "Enter Admin password to create your own admin profile", QLineEdit::Password, "", &ok);
+            if (!ok) return;
+            if (code != ADMIN_PASSWORD) {
+                throw ValidationExcpetion("Invalid Admin Password! Registration denied.");
+            }
+        }
         BaseUser* newUser = 0;
         if (isAdmin) {
             newUser = new Admin(name,login,password);
@@ -62,8 +82,11 @@ void Register_window::on_Register_submit_btn_clicked() {
     }
 }
 
-void Register_window::on_Register_back_btn_clicked() {
+void Register_window::on_Register_back_btn_clicked()
+{
     ui->status_label->clear();
-    this->hide();
-    if (m_loginWindow) m_loginWindow->show();
+    if (m_loginWindow) {
+        m_loginWindow->show();
+    }
+    this->close();
 }

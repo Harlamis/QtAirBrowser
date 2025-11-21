@@ -30,7 +30,7 @@ private:
     DatabaseManager* m_db; //database manager singleton
     // future windows will be here
     Register_window* m_registerWindow;
-    Dashboard* m_adminDashboard = nullptr;
+    Dashboard* m_dashboard = nullptr;
 
 };
 #endif // MAINWINDOW_H
