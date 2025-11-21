@@ -33,11 +33,11 @@ public:
 
     /// @brief Gets the internal model number.
     /// @return The model number.
-    int GetModel_Number() const;
+    int GetModelNumber() const;
 
     /// @brief Gets the maximum speed of the aircraft.
     /// @return Speed in km/h.
-    double GetMax_speed() const;
+    double GetMaxSpeed() const;
 
     /// @brief Gets the price per unit.
     /// @return Price in currency.
@@ -45,7 +45,7 @@ public:
 
     /// @brief Gets the number of sold units.
     /// @return The count of sold units.
-    int GetSold_units() const;
+    int GetSoldUnits() const;
 
     /// @brief Sets the model name.
     /// @param input The new name.
@@ -53,11 +53,11 @@ public:
 
     /// @brief Sets the model number.
     /// @param input The new model number.
-    void SetModel_Number(int input);
+    void SetModelNumber(int input);
 
     /// @brief Sets the maximum speed.
     /// @param input The new speed in km/h.
-    void Set_Max_speed(double input);
+    void SetMaxSpeed(double input);
 
     /// @brief Sets the price per unit.
     /// @param input The new price.
@@ -65,7 +65,7 @@ public:
 
     /// @brief Sets the number of sold units.
     /// @param input The quantity sold.
-    void SetSold_units(int input);
+    void SetSoldUnits(int input);
 
     /// @brief Calculates total revenue for this product.
     /// @return Price multiplied by sold units.

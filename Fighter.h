@@ -24,14 +24,14 @@ public:
     virtual QJsonObject toJson() const override;
     virtual void fromJson(const QJsonObject &json) override;
 
-    double GetStealth_range() const;
-    void SetStealth_range(double range);
+    double GetStealthRange() const;
+    void SetStealthRange(double range);
 
-    double GetAmmo_capacity() const;
-    void SetAmmo_capacity(double cap);
+    double GetAmmoCapacity() const;
+    void SetAmmoCapacity(double cap);
 
-    double GetMax_flight_height() const;
-    void SetMax_flight_height(double height);
+    double GetMaxFlightHeight() const;
+    void SetMaxFlightHeight(double height);
 
     /// @brief Checks if the aircraft can reach the target altitude.
     /// @param height Target height.

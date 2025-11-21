@@ -43,18 +43,18 @@ void ProductEditorDialog::on_buttonBox_accepted()
     if (type == "Commercial") {
         Commercial* c = new Commercial();
 
-        c->SetNumberof_decks(ui->comm_decks->value());
-        c->SetNumberof_pilots(ui->comm_pilots->value());
-        c->SetPassengers_capacity(ui->comm_passengers->value());
-        c->SetLuggage_capacity(ui->comm_luggage->value());
+        c->SetNumberOfDecks(ui->comm_decks->value());
+        c->SetNumberOfPilots(ui->comm_pilots->value());
+        c->SetPassengerCapacity(ui->comm_passengers->value());
+        c->SetLuggageCapacity(ui->comm_luggage->value());
 
         m_product = c;
     }
     else if (type == "Fighter") {
         Fighter* f = new Fighter();
-        f->SetStealth_range(ui->fight_stealth->value());
-        f->SetAmmo_capacity(ui->fight_ammo->value());
-        f->SetMax_flight_height(ui->fight_height->value());
+        f->SetStealthRange(ui->fight_stealth->value());
+        f->SetAmmoCapacity(ui->fight_ammo->value());
+        f->SetMaxFlightHeight(ui->fight_height->value());
 
         m_product = f;
     }
@@ -62,12 +62,12 @@ void ProductEditorDialog::on_buttonBox_accepted()
     if (m_product) {
         m_product->SetModelName(model);
         m_product->SetPrice(ui->inp_price->value());
-        m_product->Set_Max_speed(ui->inp_speed->value());
-        m_product->SetSold_units(0);
+        m_product->SetMaxSpeed(ui->inp_speed->value());
+        m_product->SetSoldUnits(0);
         accept();
     }
 }
 
-AircraftProduct* ProductEditorDialog::getCreatedProduct() const {
+AircraftProduct* ProductEditorDialog::GetCreatedProduct() const {
     return m_product;
 }

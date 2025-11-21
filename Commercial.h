@@ -30,17 +30,17 @@ public:
     virtual QJsonObject toJson() const override;
     virtual void fromJson(const QJsonObject &json) override;
 
-    int GetNumberof_decks() const;
-    void SetNumberof_decks(int decks);
+    int GetNumberOfDecks() const;
+    void SetNumberOfDecks(int decks);
 
-    int GetNumberof_pilots() const;
-    void SetNumberof_pilots(int pilots);
+    int GetNumberOfPilots() const;
+    void SetNumberOfPilots(int pilots);
 
-    int GetPassengers_capacity() const;
-    void SetPassengers_capacity(int new_cap);
+    int GetPassengersCapacity() const;
+    void SetPassengerCapacity(int new_cap);
 
-    double GetLuggage_capacity() const;
-    void SetLuggage_capacity(double new_cap);
+    double GetLuggageCapacity() const;
+    void SetLuggageCapacity(double new_cap);
 
     /// @brief Checks if the plane fits a certain number of passengers.
     /// @param passengers Number of people.

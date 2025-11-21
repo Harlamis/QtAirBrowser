@@ -61,35 +61,35 @@ void Commercial::fromJson(const QJsonObject &json) {
     luggageCapacity = json["luggage_capacity"].toDouble();
 }
 
-int Commercial::GetNumberof_decks() const {
+int Commercial::GetNumberOfDecks() const {
     return numberOfDecks;
 }
 
-void Commercial::SetNumberof_decks(int decks) {
+void Commercial::SetNumberOfDecks(int decks) {
     numberOfDecks = decks;
 }
 
-int Commercial::GetNumberof_pilots() const {
+int Commercial::GetNumberOfPilots() const {
     return numberOfPilots;
 }
 
-void Commercial::SetNumberof_pilots(int pilots) {
+void Commercial::SetNumberOfPilots(int pilots) {
     numberOfPilots = pilots;
 }
 
-int Commercial::GetPassengers_capacity() const {
+int Commercial::GetPassengersCapacity() const {
     return passengersCapacity;
 }
 
-void Commercial::SetPassengers_capacity(int new_cap) {
+void Commercial::SetPassengerCapacity(int new_cap) {
     passengersCapacity = new_cap;
 }
 
-double Commercial::GetLuggage_capacity() const {
+double Commercial::GetLuggageCapacity() const {
     return luggageCapacity;
 }
 
-void Commercial::SetLuggage_capacity(double new_cap) {
+void Commercial::SetLuggageCapacity(double new_cap) {
     luggageCapacity = new_cap;
 }
 
