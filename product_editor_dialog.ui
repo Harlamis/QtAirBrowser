@@ -61,7 +61,7 @@
       <item row="2" column="1">
        <widget class="QDoubleSpinBox" name="inp_price">
         <property name="maximum">
-         <double>1000000000.00</double>
+         <double>1000000000.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -75,20 +75,18 @@
       <item row="3" column="1">
        <widget class="QDoubleSpinBox" name="inp_speed">
         <property name="maximum">
-         <double>10000.00</double>
+         <double>999999.000000000000000</double>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>
-
      <widget class="QWidget" name="page_commercial">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -117,7 +115,7 @@
           <item row="1" column="1">
            <widget class="QSpinBox" name="comm_passengers">
             <property name="maximum">
-             <number>1000</number>
+             <number>9999</number>
             </property>
            </widget>
           </item>
@@ -129,7 +127,11 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="comm_pilots"/>
+           <widget class="QSpinBox" name="comm_pilots">
+            <property name="maximum">
+             <number>9999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_4">
@@ -141,7 +143,7 @@
           <item row="3" column="1">
            <widget class="QDoubleSpinBox" name="comm_luggage">
             <property name="maximum">
-             <double>100000.00</double>
+             <double>100000.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -150,7 +152,6 @@
        </item>
       </layout>
      </widget>
-
      <widget class="QWidget" name="page_fighter">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -189,7 +190,7 @@
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="fight_height">
             <property name="maximum">
-             <double>100000.00</double>
+             <double>100000.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -200,7 +201,6 @@
      </widget>
     </widget>
    </item>
-
    <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
@@ -214,7 +214,6 @@
      </property>
     </spacer>
    </item>
-
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">

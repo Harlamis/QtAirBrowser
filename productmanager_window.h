@@ -24,6 +24,8 @@ private slots:
     void on_filter_name_textChanged(const QString &arg1);
     void on_filter_type_currentTextChanged(const QString &arg1);
     void on_filter_min_speed_valueChanged(int &arg1);
+    void on_filter_passengers_valueChanged(int arg1);
+    void on_filter_stealth_valueChanged(double arg1);
 private:
     Ui::ProductManagerWindow *ui;
     AircraftDesigner* m_designer;

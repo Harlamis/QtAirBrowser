@@ -4,6 +4,8 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include "product_editor_dialog.h"
+#include "Commercial.h"
+#include "Fighter.h"
 
 
 ProductManagerWindow::ProductManagerWindow(AircraftDesigner* designer,QWidget *parent)
@@ -75,21 +77,84 @@ void ProductManagerWindow::applyFilters()
     QString typeFilter = ui->filter_type->currentText();
     int minSpeed = ui->filter_min_speed->value();
 
+    // Отримуємо значення спец-фільтрів
+    int minPassengers = ui->filter_passengers->value();
+    double minStealth = ui->filter_stealth->value();
+
+    // Отримуємо повний список продуктів (щоб мати доступ до об'єктів, а не лише тексту в таблиці)
+    QList<AircraftProduct*> products = m_designer->GetProductsList();
+
     for (int i = 0; i < ui->table_products->rowCount(); ++i) {
         bool showRow = true;
+
+        // 1. Загальні фільтри (беремо з таблиці для швидкості, або з об'єкта)
         QString name = ui->table_products->item(i, 0)->text().toLower();
         if (!name.contains(nameFilter)) showRow = false;
+
         QString type = ui->table_products->item(i, 1)->text();
         if (typeFilter != "All Types" && type != typeFilter) showRow = false;
-        double speed = ui->table_products->item(i, 2)->data(Qt::DisplayRole).toDouble();
+
+        double speed = ui->table_products->item(i, 2)->data(Qt::EditRole).toDouble();
         if (speed < minSpeed) showRow = false;
+
+        // 2. ЕКСКЛЮЗИВНІ ФІЛЬТРИ
+        // Нам потрібен доступ до самого об'єкта.
+        // Оскільки порядок рядків у таблиці відповідає порядку в списку products (до сортування),
+        // це може бути ненадійно, якщо таблиця відсортована користувачем.
+        // Тому краще знайти об'єкт за моделлю (унікальна назва).
+
+        QString modelName = ui->table_products->item(i, 0)->text();
+
+        // Шукаємо об'єкт у списку (це швидко для невеликих списків)
+        AircraftProduct* currentObj = nullptr;
+        for (auto p : products) {
+            if (p->GetModelName() == modelName) {
+                currentObj = p;
+                break;
+            }
+        }
+
+        if (currentObj && showRow) { // Якщо рядок ще не приховано попередніми фільтрами
+            if (typeFilter == "Commercial") {
+                // Спроба перетворити на Commercial
+                Commercial* comm = dynamic_cast<Commercial*>(currentObj);
+                if (comm) {
+                    // Перевірка унікального поля
+                    if (comm->GetPassengers_capacity() < minPassengers) showRow = false;
+                }
+            }
+            else if (typeFilter == "Fighter") {
+                // Спроба перетворити на Fighter
+                Fighter* fight = dynamic_cast<Fighter*>(currentObj);
+                if (fight) {
+                    // Перевірка унікального поля
+                    if (fight->GetStealth_range() < minStealth) showRow = false;
+                }
+            }
+        }
+
         ui->table_products->setRowHidden(i, !showRow);
     }
 }
 
-void ProductManagerWindow::on_filter_name_textChanged(const QString &arg1) { applyFilters(); }
-void ProductManagerWindow::on_filter_type_currentTextChanged(const QString &arg1) { applyFilters(); }
+// --- СЛОТИ ---
+
+void ProductManagerWindow::on_filter_name_textChanged(const QString &) { applyFilters(); }
+
+void ProductManagerWindow::on_filter_type_currentTextChanged(const QString &text) {
+    if (text == "Commercial") {
+        ui->stackedFilter->setCurrentIndex(1);
+    } else if (text == "Fighter") {
+        ui->stackedFilter->setCurrentIndex(2);
+    } else {
+        ui->stackedFilter->setCurrentIndex(0);
+    }
+    applyFilters();
+}
+
 void ProductManagerWindow::on_filter_min_speed_valueChanged(int &arg1) { applyFilters(); }
+void ProductManagerWindow::on_filter_passengers_valueChanged(int) { applyFilters(); }
+void ProductManagerWindow::on_filter_stealth_valueChanged(double) { applyFilters(); }
 
 void ProductManagerWindow::on_btn_add_clicked()
 {
