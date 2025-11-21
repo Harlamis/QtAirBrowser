@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <utility>
 
+/// @brief Represents an administrator user with extended privileges.
 class Admin : public BaseUser
 {
 public:
@@ -17,7 +18,9 @@ public:
     Admin(Admin&& other) noexcept;
     Admin& operator=(Admin&& other) noexcept;
 
+    /// @brief Returns "Admin".
     virtual QString GetRole() const override;
+
     virtual QJsonObject toJson() const override;
     virtual void fromJson(const QJsonObject &json) override;
 };
