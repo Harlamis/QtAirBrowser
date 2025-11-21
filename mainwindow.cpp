@@ -13,9 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     m_db = &DatabaseManager::instance(); //creating database instance
     try {
-        if (!m_db->loadFromFile()) throw ValidationExcpetion("Failed to load database file!");
+        if (!m_db->loadFromFile()) throw ValidationException("Failed to load database file!");
     }
-    catch (ValidationExcpetion &e) {
+    catch (ValidationException &e) {
          ui->status_label->setText(e.getMessage());
     }
 
@@ -41,12 +41,12 @@ void MainWindow::on_Login_submit_btn_clicked()
         //Collect data
         QString username = ui->Login_username_input->text().trimmed(); //trim to get rid of spaces
         QString password = ui->Login_password_input->text();
-        if (username.isEmpty()) throw ValidationExcpetion("Please, enter your username");
-        if (password.isEmpty()) throw ValidationExcpetion("Please, enter your password");
+        if (username.isEmpty()) throw ValidationException("Please, enter your username");
+        if (password.isEmpty()) throw ValidationException("Please, enter your password");
         //attempting to login...
         BaseUser* user = m_db->login(username,password);
         if (user == nullptr) {
-            throw ValidationExcpetion("Invalid login or password");
+            throw ValidationException("Invalid login or password");
         }
         ui->Login_password_input->clear();
         this->hide();
@@ -56,7 +56,7 @@ void MainWindow::on_Login_submit_btn_clicked()
         }
         m_dashboard->show();
     }
-    catch (const ValidationExcpetion &e) {
+    catch (const ValidationException &e) {
         ui->status_label->setText(e.getMessage());
     }
 

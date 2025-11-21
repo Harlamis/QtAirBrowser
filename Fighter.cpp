@@ -5,9 +5,9 @@
 
 Fighter::Fighter(double stealth_r, double ammo_c, double mf_height)
     : AircraftProduct(),
-    stealth_range{stealth_r},
-    ammo_capacity{ammo_c},
-    max_flight_height{mf_height} {}
+    stealthRange{stealth_r},
+    ammoCapacity{ammo_c},
+    maxFlightHeight{mf_height} {}
 
 Fighter::Fighter(double stealth_r, double ammo_c)
     : Fighter(stealth_r, ammo_c, 0.0) {}
@@ -20,19 +20,19 @@ Fighter::Fighter()
 
 Fighter::Fighter(const Fighter &other)
     : AircraftProduct(other),
-    stealth_range{other.stealth_range},
-    ammo_capacity{other.ammo_capacity},
-    max_flight_height{other.max_flight_height} {}
+    stealthRange{other.stealthRange},
+    ammoCapacity{other.ammoCapacity},
+    maxFlightHeight{other.maxFlightHeight} {}
 
 Fighter::Fighter(Fighter &&other) noexcept
     : AircraftProduct(std::move(other)),
-    stealth_range{other.stealth_range},
-    ammo_capacity{other.ammo_capacity},
-    max_flight_height{other.max_flight_height}
+    stealthRange{other.stealthRange},
+    ammoCapacity{other.ammoCapacity},
+    maxFlightHeight{other.maxFlightHeight}
 {
-    other.stealth_range = 0.0;
-    other.ammo_capacity = 0.0;
-    other.max_flight_height = 0.0;
+    other.stealthRange = 0.0;
+    other.ammoCapacity = 0.0;
+    other.maxFlightHeight = 0.0;
 }
 
 Fighter::~Fighter() {
@@ -45,47 +45,47 @@ QString Fighter::GetType() const {
 
 QJsonObject Fighter::toJson() const {
     QJsonObject object = AircraftProduct::toJson();
-    object["stealth_range"] = stealth_range;
-    object["ammo_capacity"] = ammo_capacity;
-    object["max_flight_height"] = max_flight_height;
+    object["stealth_range"] = stealthRange;
+    object["ammo_capacity"] = ammoCapacity;
+    object["max_flight_height"] = maxFlightHeight;
     return object;
 }
 
 void Fighter::fromJson(const QJsonObject &json) {
     AircraftProduct::fromJson(json);
-    stealth_range = json["stealth_range"].toDouble();
-    ammo_capacity = json["ammo_capacity"].toDouble();
-    max_flight_height = json["max_flight_height"].toDouble();
+    stealthRange = json["stealth_range"].toDouble();
+    ammoCapacity = json["ammo_capacity"].toDouble();
+    maxFlightHeight = json["max_flight_height"].toDouble();
 }
 
 double Fighter::GetStealth_range() const {
-    return stealth_range;
+    return stealthRange;
 }
 
 void Fighter::SetStealth_range(double range) {
-    stealth_range = range;
+    stealthRange = range;
 }
 
 double Fighter::GetAmmo_capacity() const {
-    return ammo_capacity;
+    return ammoCapacity;
 }
 
 void Fighter::SetAmmo_capacity(double cap) {
-    ammo_capacity = cap;
+    ammoCapacity = cap;
 }
 
 double Fighter::GetMax_flight_height() const {
-    return max_flight_height;
+    return maxFlightHeight;
 }
 
 void Fighter::SetMax_flight_height(double height) {
-    max_flight_height = height;
+    maxFlightHeight = height;
 }
 
 bool Fighter::CanReach(double height) const {
-    return height <= max_flight_height;
+    return height <= maxFlightHeight;
 }
 
 bool Fighter::CanFitAmmo(double ammo) const {
-    return ammo <= ammo_capacity;
+    return ammo <= ammoCapacity;
 }

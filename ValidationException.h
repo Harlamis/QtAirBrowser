@@ -5,13 +5,13 @@
 
 /// @brief Custom exception for validation errors.
 /// Thrown when user input is invalid or database operations fail.
-class ValidationExcpetion : public std::exception {
+class ValidationException : public std::exception {
     QString message;
     QByteArray m_utf8Message;
 public:
     /// @brief Constructs exception with a message.
     /// @param msg The error message.
-    explicit ValidationExcpetion(const QString& msg)
+    explicit ValidationException(const QString& msg)
         : message(msg) {
         m_utf8Message = message.toUtf8();
     };

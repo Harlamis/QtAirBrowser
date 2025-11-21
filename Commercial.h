@@ -9,10 +9,10 @@
 /// @brief Represents a commercial aircraft.
 /// Extends AircraftProduct with passenger and cargo capabilities.
 class Commercial : public AircraftProduct {
-    int numberof_decks;
-    int numberof_pilots;
-    int passengers_capacity;
-    double luggage_capacity;
+    int numberOfDecks;
+    int numberOfPilots;
+    int passengersCapacity;
+    double luggageCapacity;
 public:
     Commercial(int decks, int pilots, int passengers_cap, double luggage_cap);
     Commercial();

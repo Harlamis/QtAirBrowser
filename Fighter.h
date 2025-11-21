@@ -6,9 +6,9 @@
 /// @brief Represents a military fighter aircraft.
 /// Extends AircraftProduct with combat specifications.
 class Fighter : public AircraftProduct {
-    double stealth_range;
-    double ammo_capacity;
-    double max_flight_height;
+    double stealthRange;
+    double ammoCapacity;
+    double maxFlightHeight;
 public:
     Fighter();
     Fighter(double stealth_r);

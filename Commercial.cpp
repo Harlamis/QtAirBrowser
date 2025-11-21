@@ -1,8 +1,8 @@
 #include "Commercial.h"
 
 Commercial::Commercial(int decks, int pilots, int passengers_cap, double luggage_cap)
-    : AircraftProduct(), numberof_decks{decks}, numberof_pilots{pilots},
-    passengers_capacity{passengers_cap}, luggage_capacity{luggage_cap} {}
+    : AircraftProduct(), numberOfDecks{decks}, numberOfPilots{pilots},
+    passengersCapacity{passengers_cap}, luggageCapacity{luggage_cap} {}
 
 Commercial::Commercial()
     : Commercial(0,1,0,0) {}
@@ -18,22 +18,22 @@ Commercial::Commercial(int decks, int pilots, int passengers_cap)
 
 Commercial::Commercial(const Commercial &other)
     : AircraftProduct(other),
-    numberof_decks{other.numberof_decks},
-    numberof_pilots{other.numberof_pilots},
-    passengers_capacity{other.passengers_capacity},
-    luggage_capacity{other.luggage_capacity} {}
+    numberOfDecks{other.numberOfDecks},
+    numberOfPilots{other.numberOfPilots},
+    passengersCapacity{other.passengersCapacity},
+    luggageCapacity{other.luggageCapacity} {}
 
 Commercial::Commercial(Commercial &&other) noexcept
     : AircraftProduct(std::move(other)),
-    numberof_decks{other.numberof_decks},
-    numberof_pilots{other.numberof_pilots},
-    passengers_capacity{other.passengers_capacity},
-    luggage_capacity{other.luggage_capacity}
+    numberOfDecks{other.numberOfDecks},
+    numberOfPilots{other.numberOfPilots},
+    passengersCapacity{other.passengersCapacity},
+    luggageCapacity{other.luggageCapacity}
 {
-    other.numberof_decks = 0;
-    other.numberof_pilots = 0;
-    other.passengers_capacity = 0;
-    other.luggage_capacity = 0;
+    other.numberOfDecks = 0;
+    other.numberOfPilots = 0;
+    other.passengersCapacity = 0;
+    other.luggageCapacity = 0;
 }
 
 Commercial::~Commercial() {
@@ -46,57 +46,57 @@ QString Commercial::GetType() const {
 
 QJsonObject Commercial::toJson() const {
     QJsonObject object = AircraftProduct::toJson();
-    object["numberof_decks"] = numberof_decks;
-    object["numberof_pilots"] = numberof_pilots;
-    object["passengers_capacity"] = passengers_capacity;
-    object["luggage_capacity"] = luggage_capacity;
+    object["numberof_decks"] = numberOfDecks;
+    object["numberof_pilots"] = numberOfPilots;
+    object["passengers_capacity"] = passengersCapacity;
+    object["luggage_capacity"] = luggageCapacity;
     return object;
 }
 
 void Commercial::fromJson(const QJsonObject &json) {
     AircraftProduct::fromJson(json);
-    numberof_decks = json["numberof_decks"].toInt();
-    numberof_pilots = json["numberof_pilots"].toInt();
-    passengers_capacity = json["passengers_capacity"].toInt();
-    luggage_capacity = json["luggage_capacity"].toDouble();
+    numberOfDecks = json["numberof_decks"].toInt();
+    numberOfPilots = json["numberof_pilots"].toInt();
+    passengersCapacity = json["passengers_capacity"].toInt();
+    luggageCapacity = json["luggage_capacity"].toDouble();
 }
 
 int Commercial::GetNumberof_decks() const {
-    return numberof_decks;
+    return numberOfDecks;
 }
 
 void Commercial::SetNumberof_decks(int decks) {
-    numberof_decks = decks;
+    numberOfDecks = decks;
 }
 
 int Commercial::GetNumberof_pilots() const {
-    return numberof_pilots;
+    return numberOfPilots;
 }
 
 void Commercial::SetNumberof_pilots(int pilots) {
-    numberof_pilots = pilots;
+    numberOfPilots = pilots;
 }
 
 int Commercial::GetPassengers_capacity() const {
-    return passengers_capacity;
+    return passengersCapacity;
 }
 
 void Commercial::SetPassengers_capacity(int new_cap) {
-    passengers_capacity = new_cap;
+    passengersCapacity = new_cap;
 }
 
 double Commercial::GetLuggage_capacity() const {
-    return luggage_capacity;
+    return luggageCapacity;
 }
 
 void Commercial::SetLuggage_capacity(double new_cap) {
-    luggage_capacity = new_cap;
+    luggageCapacity = new_cap;
 }
 
 bool Commercial::CanFitPassengers(int passengers) const {
-    return passengers <= passengers_capacity;
+    return passengers <= passengersCapacity;
 }
 
 bool Commercial::CanFitLuggage(double luggage) const {
-    return luggage <= luggage_capacity;
+    return luggage <= luggageCapacity;
 }

@@ -10,11 +10,11 @@
 /// @brief Abstract base class for all aircraft products.
 /// Contains common properties like model name, speed, and price.
 class AircraftProduct : public ISerializable {
-    QString model_name;
-    int model_number;
-    double max_speed;
-    double price_per_unit;
-    int sold_units;
+    QString modelName;
+    int modelNumber;
+    double maxSpeed;
+    double pricePerUnit;
+    int soldUnits;
 public:
     AircraftProduct(QString mname, int mnumber, double new_max_speed, double price, int sold);
     AircraftProduct(QString mname);

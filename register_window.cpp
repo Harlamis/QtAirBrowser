@@ -42,18 +42,18 @@ void Register_window::on_Register_submit_btn_clicked() {
         QString password = ui->Register_password_input->text().trimmed();
         bool isAdmin = ui->Register_admin_checkbox->isChecked();
         //validation
-        if (name.isEmpty()) throw ValidationExcpetion("Please enter username");
-        if (login.isEmpty()) throw ValidationExcpetion("Please enter Login");
-        if (password.isEmpty()) throw ValidationExcpetion("Please enter a password");
-        if (password.length() < 8) throw ValidationExcpetion("Password must be at least 8 characters long");
+        if (name.isEmpty()) throw ValidationException("Please enter username");
+        if (login.isEmpty()) throw ValidationException("Please enter Login");
+        if (password.isEmpty()) throw ValidationException("Please enter a password");
+        if (password.length() < 8) throw ValidationException("Password must be at least 8 characters long");
         //making sure that there is no dublicate user in DB
-        if (m_db->findUser(login)) throw ValidationExcpetion("User with this login already exists");
+        if (m_db->findUser(login)) throw ValidationException("User with this login already exists");
         if (isAdmin) {
             bool ok;
             QString code = QInputDialog::getText(this, "Admin Verification", "Enter Admin password to create your own admin profile", QLineEdit::Password, "", &ok);
             if (!ok) return;
             if (code != ADMIN_PASSWORD) {
-                throw ValidationExcpetion("Invalid Admin Password! Registration denied.");
+                throw ValidationException("Invalid Admin Password! Registration denied.");
             }
         }
         BaseUser* newUser = 0;
@@ -75,9 +75,9 @@ void Register_window::on_Register_submit_btn_clicked() {
             if (m_loginWindow) m_loginWindow->show();
         } else {
             delete newUser;
-            throw ValidationExcpetion("Failed to create user for unknown reason");
+            throw ValidationException("Failed to create user for unknown reason");
         }
-    } catch (ValidationExcpetion &e) {
+    } catch (ValidationException &e) {
         ui->status_label->setText(e.getMessage());
     }
 }
