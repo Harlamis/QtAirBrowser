@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "DatabaseManager.h"
 #include "register_window.h"
-#include "admin_dashboard.h"
+#include "dashboard.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

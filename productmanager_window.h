@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QDialog>
 #include "DatabaseManager.h"
-#include "admin_dashboard.h"
+#include "dashboard.h"
 
 namespace Ui {
 class ProductManagerWindow;

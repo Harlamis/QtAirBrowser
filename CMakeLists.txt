@@ -40,7 +40,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Admin.h Admin.cpp
         DatabaseManager.h DatabaseManager.cpp
         ValidationException.h
-        admin_dashboard.h admin_dashboard.cpp admin_dashboard.ui
+        dashboard.h dashboard.cpp dashboard.ui
         productmanager_window.h productmanager_window.cpp productmanager_window.ui
         product_editor_dialog.h product_editor_dialog.cpp product_editor_dialog.ui
     )

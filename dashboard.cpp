@@ -1,14 +1,14 @@
-#include "admin_dashboard.h"
-#include "ui_admin_dashboard.h"
+#include "dashboard.h"
+#include "ui_dashboard.h"
 #include "AircraftDesigner.h"
 #include "BaseUser.h"
 #include "productmanager_window.h"
 #include <QInputDialog>
 #include <QMessageBox>
 
-AdminDashboard::AdminDashboard(QWidget *parent) :
+Dashboard::Dashboard(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::AdminDashboard)
+    ui(new Ui::Dashboard)
 {
     ui->setupUi(this);
     m_db = &DatabaseManager::instance();
@@ -17,12 +17,12 @@ AdminDashboard::AdminDashboard(QWidget *parent) :
     refreshUsersTable();
 }
 
-AdminDashboard::~AdminDashboard()
+Dashboard::~Dashboard()
 {
     delete ui;
 }
 
-void AdminDashboard::refreshDesignersTable()
+void Dashboard::refreshDesignersTable()
 {
     ui->table_designers->setRowCount(0);
 
@@ -44,7 +44,7 @@ void AdminDashboard::refreshDesignersTable()
     ui->table_designers->setSortingEnabled(true);
 }
 
-void AdminDashboard::refreshUsersTable()
+void Dashboard::refreshUsersTable()
 {
     ui->table_users->setRowCount(0);
     QList<BaseUser*> users = m_db->getUsers();
@@ -58,7 +58,7 @@ void AdminDashboard::refreshUsersTable()
     }
 }
 
-void AdminDashboard::on_btn_add_designer_clicked()
+void Dashboard::on_btn_add_designer_clicked()
 {
     bool ok;
     QString name = QInputDialog::getText(this, "Add Designer",
@@ -77,7 +77,7 @@ void AdminDashboard::on_btn_add_designer_clicked()
     }
 }
 
-void AdminDashboard::on_btn_remove_designer_clicked()
+void Dashboard::on_btn_remove_designer_clicked()
 {
     int currentRow = ui->table_designers->currentRow();
     if (currentRow < 0) {
@@ -99,7 +99,7 @@ void AdminDashboard::on_btn_remove_designer_clicked()
     }
 }
 
-void AdminDashboard::on_btn_delete_user_clicked()
+void Dashboard::on_btn_delete_user_clicked()
 {
     int currentRow = ui->table_users->currentRow();
     if (currentRow < 0) return;
@@ -116,7 +116,7 @@ void AdminDashboard::on_btn_delete_user_clicked()
     }
 }
 
-void AdminDashboard::on_search_input_textChanged(const QString &arg1)
+void Dashboard::on_search_input_textChanged(const QString &arg1)
 {
     QString filter = arg1.toLower();
 
@@ -131,11 +131,11 @@ void AdminDashboard::on_search_input_textChanged(const QString &arg1)
     }
 }
 
-void AdminDashboard::on_btn_help_clicked()
+void Dashboard::on_btn_help_clicked()
 {
     //lmao why not use html
     QString helpText =
-        "<h3>Admin Dashboard Manual</h3>"
+        "<h3>Dashboard Manual</h3>"
         "<ul>"
         "<li><b>Add Designer:</b> Click the green button to create a new aircraft company.</li>"
         "<li><b>Edit Designer:</b> Double-click on a designer row to edit details or manage products.</li>"
@@ -147,7 +147,7 @@ void AdminDashboard::on_btn_help_clicked()
     QMessageBox::about(this, "User Manual", helpText);
 }
 
-void AdminDashboard::on_table_designers_cellDoubleClicked(int row, int column) {
+void Dashboard::on_table_designers_cellDoubleClicked(int row, int column) {
     QTableWidgetItem* item = ui->table_designers->item(row, 0);
     if (!item) return;
 
@@ -164,13 +164,13 @@ void AdminDashboard::on_table_designers_cellDoubleClicked(int row, int column) {
     }
 }
 
-void AdminDashboard::on_btn_refresh_clicked()
+void Dashboard::on_btn_refresh_clicked()
 {
     refreshDesignersTable();
     refreshUsersTable();
 }
 
-void AdminDashboard::on_btn_logout_clicked()
+void Dashboard::on_btn_logout_clicked()
 {
     m_db->logout();
     this->close();

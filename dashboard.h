@@ -1,19 +1,19 @@
-#ifndef ADMIN_DASHBOARD_H
-#define ADMIN_DASHBOARD_H
+#ifndef DASHBOARD_H
+#define DASHBOARD_H
 
 #include "DatabaseManager.h"
 #include <QMainWindow>
 
 namespace Ui {
-class AdminDashboard;
+class Dashboard;
 }
 
-class AdminDashboard : public QMainWindow {
+class Dashboard : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit AdminDashboard(QWidget *parent = nullptr);
-    ~AdminDashboard();
+    explicit Dashboard(QWidget *parent = nullptr);
+    ~Dashboard();
 
 private slots:
     void on_btn_add_designer_clicked();
@@ -25,10 +25,10 @@ private slots:
     void on_search_input_textChanged(const QString &arg1);
     void on_table_designers_cellDoubleClicked(int row, int column);
 private:
-    Ui::AdminDashboard *ui;
+    Ui::Dashboard *ui;
     DatabaseManager* m_db;
     void refreshDesignersTable();
     void refreshUsersTable();
 };
 
-#endif // ADMIN_DASHBOARD_H
+#endif // DASHBOARD_H
