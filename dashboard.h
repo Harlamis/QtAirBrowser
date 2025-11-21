@@ -12,7 +12,7 @@ class Dashboard : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit Dashboard(QWidget *parent = nullptr);
+    explicit Dashboard(BaseUser* user,QWidget *parent = nullptr);
     ~Dashboard();
 
 private slots:
@@ -27,8 +27,10 @@ private slots:
 private:
     Ui::Dashboard *ui;
     DatabaseManager* m_db;
+    BaseUser* m_currentUser;
     void refreshDesignersTable();
     void refreshUsersTable();
+    void setupPermissions();
 };
 
 #endif // DASHBOARD_H

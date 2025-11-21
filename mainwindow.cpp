@@ -53,7 +53,7 @@ void MainWindow::on_Login_submit_btn_clicked()
         QString role = user->GetRole();
         if (role == "Admin") {
         if (m_adminDashboard == nullptr) {
-            m_adminDashboard = new AdminDashboard(this);
+            m_adminDashboard = new Dashboard(this);
         }
         m_adminDashboard->show();
         } else {

@@ -28,7 +28,7 @@ private:
     Ui::ProductManagerWindow *ui;
     AircraftDesigner* m_designer;
     DatabaseManager* m_db;
-    AdminDashboard* m_adminDashboard;
+    Dashboard* m_adminDashboard;
     void refreshTable();
     void applyFilters();
 };
