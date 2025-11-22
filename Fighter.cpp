@@ -81,11 +81,3 @@ double Fighter::GetMaxFlightHeight() const {
 void Fighter::SetMaxFlightHeight(double height) {
     maxFlightHeight = height;
 }
-
-bool Fighter::CanReach(double height) const {
-    return height <= maxFlightHeight;
-}
-
-bool Fighter::CanFitAmmo(double ammo) const {
-    return ammo <= ammoCapacity;
-}

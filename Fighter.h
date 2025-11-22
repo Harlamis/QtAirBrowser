@@ -1,3 +1,4 @@
+
 #ifndef FIGHTER_H
 #define FIGHTER_H
 
@@ -32,16 +33,6 @@ public:
 
     double GetMaxFlightHeight() const;
     void SetMaxFlightHeight(double height);
-
-    /// @brief Checks if the aircraft can reach the target altitude.
-    /// @param height Target height.
-    /// @return True if max height is sufficient.
-    bool CanReach(double height) const;
-
-    /// @brief Checks if the aircraft can carry the requested ammo.
-    /// @param ammo Amount of ammo.
-    /// @return True if capacity is sufficient.
-    bool CanFitAmmo(double ammo) const;
 };
 
 #endif // FIGHTER_H
