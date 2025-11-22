@@ -33,49 +33,49 @@ public:
 
     /// @brief Loads data from JSON file.
     /// @return True on success.
-    bool loadFromFile();
+    bool LoadFromFile();
 
     /// @brief Saves data to JSON file.
     /// @return True on success.
-    bool saveToFile() const;
+    bool SaveToFile() const;
 
     /// @brief Logs in a user.
-    /// @param login User login.
+    /// @param Login User Login.
     /// @param password User password.
     /// @return Pointer to user or nullptr.
-    BaseUser* login(const QString& login, const QString& password);
+    BaseUser* Login(const QString& login, const QString& password);
 
     /// @brief Logs out the current user.
-    void logout();
+    void Logout();
 
     /// @brief Gets the currently logged-in user.
-    BaseUser* getCurrentUser() const;
+    BaseUser* GetCurrentUser() const;
 
     /// @brief Adds a new user.
     /// @param user Pointer to user.
     /// @return True if added.
-    bool addUser(BaseUser* user);
+    bool AddUser(BaseUser* user);
 
     /// @brief Removes a user by login.
-    bool removeUser(const QString& login);
+    bool RemoveUser(const QString& login);
 
     /// @brief Adds a new designer.
-    bool addDesigner(AircraftDesigner* designer);
+    bool AddDesigner(AircraftDesigner* designer);
 
     /// @brief Removes a designer by name.
-    bool removeDesigner(const QString& name);
+    bool RemoveDesigner(const QString& name);
 
     /// @brief Gets all designers.
-    QList<AircraftDesigner*> getDesigners() const;
+    QList<AircraftDesigner*> GetDesigners() const;
 
     /// @brief Gets all users.
-    QList<BaseUser*> getUsers() const;
+    QList<BaseUser*> GetUsers() const;
 
     /// @brief Finds a designer by name.
-    AircraftDesigner* findDesigner(const QString& name) const;
+    AircraftDesigner* FindDesigner(const QString& name) const;
 
     /// @brief Finds a user by login.
-    BaseUser* findUser(const QString& login) const;
+    BaseUser* FindUser(const QString& login) const;
 
 private:
     void loadUsers(const QJsonArray& usersArray);

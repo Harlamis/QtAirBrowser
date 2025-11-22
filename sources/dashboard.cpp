@@ -54,7 +54,7 @@ void Dashboard::refreshDesignersTable()
 
     ui->table_designers->setSortingEnabled(false);
 
-    QList<AircraftDesigner*> designers = m_db->getDesigners();
+    QList<AircraftDesigner*> designers = m_db->GetDesigners();
 
     for (AircraftDesigner* d : designers) {
         int row = ui->table_designers->rowCount();
@@ -73,7 +73,7 @@ void Dashboard::refreshDesignersTable()
 void Dashboard::refreshUsersTable()
 {
     ui->table_users->setRowCount(0);
-    QList<BaseUser*> users = m_db->getUsers();
+    QList<BaseUser*> users = m_db->GetUsers();
 
     for (BaseUser* u : users) {
         int row = ui->table_users->rowCount();
@@ -92,8 +92,8 @@ void Dashboard::on_btn_add_designer_clicked()
                                          "", &ok);
     if (ok && !name.isEmpty()) {
         AircraftDesigner* newDesigner = new AircraftDesigner(name);
-        if (m_db->addDesigner(newDesigner)) {
-            m_db->saveToFile();
+        if (m_db->AddDesigner(newDesigner)) {
+            m_db->SaveToFile();
             refreshDesignersTable();
             QMessageBox::information(this, "Success", "Designer added successfully.");
         } else {
@@ -118,8 +118,8 @@ void Dashboard::on_btn_remove_designer_clicked()
                                        QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
-        if (m_db->removeDesigner(name)) {
-            m_db->saveToFile();
+        if (m_db->RemoveDesigner(name)) {
+            m_db->SaveToFile();
             refreshDesignersTable();
         }
     }
@@ -131,13 +131,13 @@ void Dashboard::on_btn_delete_user_clicked()
     if (currentRow < 0) return;
 
     QString login = ui->table_users->item(currentRow, 0)->text();
-    if (login == m_db->getCurrentUser()->GetLogin()) {
+    if (login == m_db->GetCurrentUser()->GetLogin()) {
         QMessageBox::warning(this, "Error", "You cannot delete yourself!");
         return;
     }
 
-    if (m_db->removeUser(login)) {
-        m_db->saveToFile();
+    if (m_db->RemoveUser(login)) {
+        m_db->SaveToFile();
         refreshUsersTable();
     }
 }
@@ -179,7 +179,7 @@ void Dashboard::on_table_designers_cellDoubleClicked(int row, int column) {
 
     QString designerName = item->text();
 
-    AircraftDesigner* designer = m_db->findDesigner(designerName);
+    AircraftDesigner* designer = m_db->FindDesigner(designerName);
 
     if (designer) {
         ProductManagerWindow managerWindow(designer, this);
@@ -198,7 +198,7 @@ void Dashboard::on_btn_refresh_clicked()
 
 void Dashboard::on_btn_logout_clicked()
 {
-    m_db->logout();
+    m_db->Logout();
     if (this->parentWidget()) {
         this->parentWidget()->show();
     }

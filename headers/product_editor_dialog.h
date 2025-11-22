@@ -15,7 +15,7 @@ class ProductEditorDialog : public QDialog
 public:
     explicit ProductEditorDialog(QWidget *parent = nullptr);
     ~ProductEditorDialog();
-    AircraftProduct* getCreatedProduct() const;
+    AircraftProduct* GetCreatedProduct() const;
 
 private slots:
     void on_combo_type_currentIndexChanged(int index);

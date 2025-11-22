@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     m_db = &DatabaseManager::instance(); //creating database instance
     try {
-        if (!m_db->loadFromFile()) throw ValidationException("Failed to load database file!");
+        if (!m_db->LoadFromFile()) throw ValidationException("Failed to load database file!");
     }
     catch (ValidationException &e) {
          ui->status_label->setText(e.getMessage());
@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    m_db->saveToFile(); //save on program closing
+    m_db->SaveToFile(); //save on program closing
     delete ui;
 }
 
@@ -43,8 +43,8 @@ void MainWindow::on_Login_submit_btn_clicked()
         QString password = ui->Login_password_input->text();
         if (username.isEmpty()) throw ValidationException("Please, enter your username");
         if (password.isEmpty()) throw ValidationException("Please, enter your password");
-        //attempting to login...
-        BaseUser* user = m_db->login(username,password);
+        //attempting to Login...
+        BaseUser* user = m_db->Login(username,password);
         if (user == nullptr) {
             throw ValidationException("Invalid login or password");
         }

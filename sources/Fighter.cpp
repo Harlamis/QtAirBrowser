@@ -58,34 +58,26 @@ void Fighter::fromJson(const QJsonObject &json) {
     maxFlightHeight = json["max_flight_height"].toDouble();
 }
 
-double Fighter::GetStealth_range() const {
+double Fighter::GetStealthRange() const {
     return stealthRange;
 }
 
-void Fighter::SetStealth_range(double range) {
+void Fighter::SetStealthRange(double range) {
     stealthRange = range;
 }
 
-double Fighter::GetAmmo_capacity() const {
+double Fighter::GetAmmoCapacity() const {
     return ammoCapacity;
 }
 
-void Fighter::SetAmmo_capacity(double cap) {
+void Fighter::SetAmmoCapacity(double cap) {
     ammoCapacity = cap;
 }
 
-double Fighter::GetMax_flight_height() const {
+double Fighter::GetMaxFlightHeight() const {
     return maxFlightHeight;
 }
 
-void Fighter::SetMax_flight_height(double height) {
+void Fighter::SetMaxFlightHeight(double height) {
     maxFlightHeight = height;
-}
-
-bool Fighter::CanReach(double height) const {
-    return height <= maxFlightHeight;
-}
-
-bool Fighter::CanFitAmmo(double ammo) const {
-    return ammo <= ammoCapacity;
 }

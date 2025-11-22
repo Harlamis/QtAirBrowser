@@ -30,9 +30,9 @@ private:
     Ui::ProductManagerWindow *ui;
     AircraftDesigner* m_designer;
     DatabaseManager* m_db;
-    Dashboard* m_adminDashboard;
-    void refreshTable();
-    void applyFilters();
+    Dashboard* m_dashboard;
+    void RefreshTable();
+    void ApplyFilters();
 };
 
 #endif // PRODUCTMANAGER_WINDOW_H

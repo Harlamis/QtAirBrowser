@@ -47,7 +47,7 @@ void Register_window::on_Register_submit_btn_clicked() {
         if (password.isEmpty()) throw ValidationException("Please enter a password");
         if (password.length() < 8) throw ValidationException("Password must be at least 8 characters long");
         //making sure that there is no dublicate user in DB
-        if (m_db->findUser(login)) throw ValidationException("User with this login already exists");
+        if (m_db->FindUser(login)) throw ValidationException("User with this login already exists");
         if (isAdmin) {
             bool ok;
             QString code = QInputDialog::getText(this, "Admin Verification", "Enter Admin password to create your own admin profile", QLineEdit::Password, "", &ok);
@@ -63,7 +63,7 @@ void Register_window::on_Register_submit_btn_clicked() {
             newUser = new User(name,login,password);
         }
         //Adding to the DB
-        if (m_db->addUser(newUser)) {
+        if (m_db->AddUser(newUser)) {
             QMessageBox::information(this, "Success", "Account created successfully");
             //clearing fields
             ui->Register_login_input->clear();

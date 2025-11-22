@@ -47,11 +47,11 @@ QString AircraftProduct::GetModelName() const {
     return modelName;
 }
 
-int AircraftProduct::GetModel_Number() const {
+int AircraftProduct::GetModelNumber() const {
     return modelNumber;
 }
 
-double AircraftProduct::GetMax_speed() const {
+double AircraftProduct::GetMaxSpeed() const {
     return maxSpeed;
 }
 
@@ -59,7 +59,7 @@ double AircraftProduct::GetPrice() const {
     return pricePerUnit;
 }
 
-int AircraftProduct::GetSold_units() const {
+int AircraftProduct::GetSoldUnits() const {
     return soldUnits;
 }
 
@@ -67,11 +67,11 @@ void AircraftProduct::SetModelName(const QString &input) {
     modelName = input;
 }
 
-void AircraftProduct::SetModel_Number(int input) {
+void AircraftProduct::SetModelNumber(int input) {
     modelNumber = input;
 }
 
-void AircraftProduct::Set_Max_speed(double input) {
+void AircraftProduct::SetMaxSpeed(double input) {
     maxSpeed = input;
 }
 
@@ -79,7 +79,7 @@ void AircraftProduct::SetPrice(double input) {
     pricePerUnit = input;
 }
 
-void AircraftProduct::SetSold_units(int input) {
+void AircraftProduct::SetSoldUnits(int input) {
     soldUnits = input;
 }
 

@@ -30,7 +30,7 @@ DatabaseManager::~DatabaseManager() {
     m_currentUser = nullptr;
 }
 
-bool DatabaseManager::loadFromFile() {
+bool DatabaseManager::LoadFromFile() {
     QFile loadFile(DATABASE_FILE);
     if (!loadFile.open(QIODevice::ReadOnly)) {
         qWarning("Couldn't open save file.");
@@ -86,7 +86,7 @@ void DatabaseManager::loadDesigners(const QJsonArray& designersArray) {
     }
 }
 
-bool DatabaseManager::saveToFile() const {
+bool DatabaseManager::SaveToFile() const {
     QFile saveFile(DATABASE_FILE);
     if (!saveFile.open(QIODevice::WriteOnly)) {
         qWarning("Couldn't open save file.");
@@ -114,7 +114,7 @@ bool DatabaseManager::saveToFile() const {
     return true;
 }
 
-BaseUser* DatabaseManager::login(const QString& login, const QString& password) {
+BaseUser* DatabaseManager::Login(const QString& login, const QString& password) {
     for (BaseUser* user : qAsConst(m_users)) {
         if (user->GetLogin() == login && user->CheckPassword(password)) {
             m_currentUser = user;
@@ -125,29 +125,29 @@ BaseUser* DatabaseManager::login(const QString& login, const QString& password) 
     return nullptr;
 }
 
-void DatabaseManager::logout() {
+void DatabaseManager::Logout() {
     m_currentUser = nullptr;
 }
 
-BaseUser* DatabaseManager::getCurrentUser() const {
+BaseUser* DatabaseManager::GetCurrentUser() const {
     return m_currentUser;
 }
 
-bool DatabaseManager::addUser(BaseUser* user) {
-    if (!user || findUser(user->GetLogin())) {
+bool DatabaseManager::AddUser(BaseUser* user) {
+    if (!user || FindUser(user->GetLogin())) {
         return false;
     }
     m_users.append(user);
     return true;
 }
 
-bool DatabaseManager::removeUser(const QString& login) {
+bool DatabaseManager::RemoveUser(const QString& login) {
     QMutableListIterator<BaseUser*> i(m_users);
     while (i.hasNext()) {
         BaseUser* user = i.next();
         if (user && user->GetLogin() == login) {
             if (user == m_currentUser) {
-                logout();
+                Logout();
             }
             i.remove();
             delete user;
@@ -157,15 +157,15 @@ bool DatabaseManager::removeUser(const QString& login) {
     return false;
 }
 
-bool DatabaseManager::addDesigner(AircraftDesigner* designer) {
-    if (!designer || findDesigner(designer->GetName())) {
+bool DatabaseManager::AddDesigner(AircraftDesigner* designer) {
+    if (!designer || FindDesigner(designer->GetName())) {
         return false;
     }
     m_designers.append(designer);
     return true;
 }
 
-bool DatabaseManager::removeDesigner(const QString& name) {
+bool DatabaseManager::RemoveDesigner(const QString& name) {
     QMutableListIterator<AircraftDesigner*> i(m_designers);
     while (i.hasNext()) {
         AircraftDesigner* designer = i.next();
@@ -178,15 +178,15 @@ bool DatabaseManager::removeDesigner(const QString& name) {
     return false;
 }
 
-QList<AircraftDesigner*> DatabaseManager::getDesigners() const {
+QList<AircraftDesigner*> DatabaseManager::GetDesigners() const {
     return m_designers;
 }
 
-QList<BaseUser*> DatabaseManager::getUsers() const {
+QList<BaseUser*> DatabaseManager::GetUsers() const {
     return m_users;
 }
 
-AircraftDesigner* DatabaseManager::findDesigner(const QString& name) const {
+AircraftDesigner* DatabaseManager::FindDesigner(const QString& name) const {
     for (AircraftDesigner* designer : qAsConst(m_designers)) {
         if (designer->GetName() == name) {
             return designer;
@@ -195,7 +195,7 @@ AircraftDesigner* DatabaseManager::findDesigner(const QString& name) const {
     return nullptr;
 }
 
-BaseUser* DatabaseManager::findUser(const QString& login) const {
+BaseUser* DatabaseManager::FindUser(const QString& login) const {
     for (BaseUser* user : qAsConst(m_users)) {
         if (user->GetLogin() == login) {
             return user;

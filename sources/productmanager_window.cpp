@@ -23,7 +23,7 @@ ProductManagerWindow::ProductManagerWindow(AircraftDesigner* designer,QWidget *p
     ui->btn_close->setAutoDefault(false);
     ui->btn_close->setDefault(false);
     ui->filter_name->setFocus();
-    refreshTable();
+    RefreshTable();
 }
 
 ProductManagerWindow::~ProductManagerWindow()
@@ -31,7 +31,7 @@ ProductManagerWindow::~ProductManagerWindow()
     delete ui;
 }
 
-void ProductManagerWindow::refreshTable() {
+void ProductManagerWindow::RefreshTable() {
     ui->table_products->setRowCount(0);
     ui->table_products->setSortingEnabled(false); // Вимикаємо під час оновлення
 
@@ -49,7 +49,7 @@ void ProductManagerWindow::refreshTable() {
 
         // Speed
         QTableWidgetItem* speedItem = new QTableWidgetItem();
-        double speed = p->GetMax_speed();
+        double speed = p->GetMaxSpeed();
         speedItem->setData(Qt::DisplayRole, QString::number(speed, 'f', 2));
         speedItem->setData(Qt::EditRole, speed);
         ui->table_products->setItem(row, 2, speedItem);
@@ -63,15 +63,15 @@ void ProductManagerWindow::refreshTable() {
 
         // Sold Units
         QTableWidgetItem* soldItem = new QTableWidgetItem();
-        soldItem->setData(Qt::DisplayRole, p->GetSold_units());
+        soldItem->setData(Qt::DisplayRole, p->GetSoldUnits());
         ui->table_products->setItem(row, 4, soldItem);
     }
 
     ui->table_products->setSortingEnabled(true);
-    applyFilters();
+    ApplyFilters();
 }
 
-void ProductManagerWindow::applyFilters()
+void ProductManagerWindow::ApplyFilters()
 {
     QString nameFilter = ui->filter_name->text().toLower();
     QString typeFilter = ui->filter_type->currentText();
@@ -120,7 +120,7 @@ void ProductManagerWindow::applyFilters()
                 Commercial* comm = dynamic_cast<Commercial*>(currentObj);
                 if (comm) {
                     // Перевірка унікального поля
-                    if (comm->GetPassengers_capacity() < minPassengers) showRow = false;
+                    if (comm->GetPassengersCapacity() < minPassengers) showRow = false;
                 }
             }
             else if (typeFilter == "Fighter") {
@@ -128,7 +128,7 @@ void ProductManagerWindow::applyFilters()
                 Fighter* fight = dynamic_cast<Fighter*>(currentObj);
                 if (fight) {
                     // Перевірка унікального поля
-                    if (fight->GetStealth_range() < minStealth) showRow = false;
+                    if (fight->GetStealthRange() < minStealth) showRow = false;
                 }
             }
         }
@@ -139,7 +139,7 @@ void ProductManagerWindow::applyFilters()
 
 // --- СЛОТИ ---
 
-void ProductManagerWindow::on_filter_name_textChanged(const QString &) { applyFilters(); }
+void ProductManagerWindow::on_filter_name_textChanged(const QString &) { ApplyFilters(); }
 
 void ProductManagerWindow::on_filter_type_currentTextChanged(const QString &text) {
     if (text == "Commercial") {
@@ -149,24 +149,24 @@ void ProductManagerWindow::on_filter_type_currentTextChanged(const QString &text
     } else {
         ui->stackedFilter->setCurrentIndex(0);
     }
-    applyFilters();
+    ApplyFilters();
 }
 
-void ProductManagerWindow::on_filter_min_speed_valueChanged(int &arg1) { applyFilters(); }
-void ProductManagerWindow::on_filter_passengers_valueChanged(int) { applyFilters(); }
-void ProductManagerWindow::on_filter_stealth_valueChanged(double) { applyFilters(); }
+void ProductManagerWindow::on_filter_min_speed_valueChanged(int &arg1) { ApplyFilters(); }
+void ProductManagerWindow::on_filter_passengers_valueChanged(int) { ApplyFilters(); }
+void ProductManagerWindow::on_filter_stealth_valueChanged(double) { ApplyFilters(); }
 
 void ProductManagerWindow::on_btn_add_clicked()
 {
     ProductEditorDialog dialog(this);
         if (dialog.exec() == QDialog::Accepted) {
-        AircraftProduct* newProduct = dialog.getCreatedProduct();
+        AircraftProduct* newProduct = dialog.GetCreatedProduct();
 
         if (newProduct) {
             m_designer->AddProduct(newProduct);
             m_designer->RecalculateRevenue();
-            m_db->saveToFile();
-            refreshTable();
+            m_db->SaveToFile();
+            RefreshTable();
             QMessageBox::information(this, "Success", "Product added successfully!");
         }
     }
@@ -189,8 +189,8 @@ void ProductManagerWindow::on_btn_delete_clicked()
 
     if (reply == QMessageBox::Yes) {
         if (m_designer->RmProduct(modelName)) {
-            m_db->saveToFile();
-            refreshTable();
+            m_db->SaveToFile();
+            RefreshTable();
 
             QMessageBox::information(this, "Success", "Product deleted successfully.");
         } else {
